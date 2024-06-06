@@ -1,0 +1,25 @@
+services:
+  searxng:
+    image: docker.io/searxng/searxng:latest
+    volumes:
+      - ./searxng:/etc/searxng:rw
+    ports:
+      - 4000:8080
+    networks:
+      - perplexica-network
+
+  perplexica-backend:
+    build:
+      context: .
+      dockerfile: backend.dockerfile
+      args:
+        - SEARXNG_API_URL=http://searxng:8080
+    depends_on:
+      - searxng
+    ports:
+      - 3001:3001
+    networks:
+      - perplexica-network
+
+networks:
+  perplexica-network:
