@@ -1,5 +1,4 @@
-import fs from 'fs';
-import { config as dotenvConfig } from 'dotenv';
+require('dotenv').config();
 import path from 'path';
 
 interface Config {
@@ -15,22 +14,22 @@ interface Config {
     SEARXNG: string;
     OLLAMA: string;
   };
-}
+};
 
-const config: Config {
+const config: Config = {
   GENERAL: {
-    PORT: process.env.PORT || '',
-    SIMILARITY_MEASURE: process.env.SIMILARITY_MEASURE || '',
+    PORT: Number(process.env.PORT) || 3001,
+    SIMILARITY_MEASURE: process.env.SIMILARITY_MEASURE || ''
   },
   API_KEYS: {
     OPENAI: process.env.OPENAI || '',
-    GROQ: process.env.GROQ || '',
+    GROQ: process.env.GROQ || ''
   },
   API_ENDPOINTS: {
     SEARXNG: process.env.SEARXNG || '',
-    OLLAMA: process.env.OLLAMA || '',
+    OLLAMA: process.env.OLLAMA || ''
   }
-}
+};
 
 type RecursivePartial<T> = {
   [P in keyof T]?: RecursivePartial<T[P]>;
