@@ -12,7 +12,7 @@ const app = express();
 const server = http.createServer(app);
 
 const corsOptions = {
-  origin: '*',
+  origin: 'https://perpetual-vercel.vercel.app',
 };
 
 app.use(cors(corsOptions));
